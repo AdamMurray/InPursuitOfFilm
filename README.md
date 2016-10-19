@@ -2,7 +2,7 @@
 # In Pursuit of Film
 
 A progressive web application which allows users to search The Movie DB API,
-and view matching films, TV shows, and actors.
+and view matching films, TV shows, and people.
 
 ## Building // Development // Testing
 

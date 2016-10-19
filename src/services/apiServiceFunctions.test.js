@@ -309,9 +309,9 @@ test('formatApiData(data, "SEARCH_TVSHOW_RESULTS") returns formatted data', () =
 });
 
 /**
- * Test formatApiData(data, "SEARCH_ACTOR_RESULTS")
+ * Test formatApiData(data, "SEARCH_PEOPLE_RESULTS")
  */
-test('formatApiData(data, "SEARCH_ACTOR_RESULTS") returns formatted data', () => {
+test('formatApiData(data, "SEARCH_PEOPLE_RESULTS") returns formatted data', () => {
   const _dataBeforeFormat_ = {
     "page": 1,
     "results": [

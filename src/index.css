@@ -6,3 +6,12 @@ body {
   font-size: 16px;
   background-color: #ddd;
 }
+
+.ipof__button {
+  padding: .4rem .8rem;
+  border: 2px solid #13002b;
+  color: #13002b;
+  font-size: .9rem;
+  text-transform: uppercase;
+  background: transparent;
+}
