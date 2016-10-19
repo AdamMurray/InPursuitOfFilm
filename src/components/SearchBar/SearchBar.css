@@ -1,0 +1,20 @@
+
+.ipof__search-bar {
+  background-color: #fff;
+  padding: 1rem;
+}
+
+.ipof__search-bar input {
+  border: none;
+  border-bottom: 1px solid #aaa;
+  line-height: 1.5;
+  font-size: 1rem;
+  color: #555;
+  outline: none;
+  transition-duration: .2s;
+  margin-right: 1rem;
+}
+
+.ipof__search-bar input:focus {
+  border-bottom: 1px solid #13002b;
+}
