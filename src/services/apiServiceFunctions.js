@@ -5,8 +5,8 @@ import _ from 'lodash';
 /* ====================================== */
 
 export {
-  getAuthedRequest,
-  formatApiData
+getAuthedRequest,
+formatApiData
 }
 
 /* ====================================== */
@@ -28,16 +28,26 @@ export {
  * 
  * @returns { Request }
  */
-function getAuthedRequest(path, params, apiKey) {
-  let requestString = `${path}?api_key=${apiKey}`;
+function getAuthedRequest({
+  path = null,
+  params = {},
+  apiKey = null
+}) {
 
-  if (params !== undefined) {
-    _.forEach(params, (value, key) => {
-      requestString += `&${key}=${value}`;
-    });
+  if (path && apiKey) {
+    let requestString = `${path}?api_key=${apiKey}`;
+
+    if (params !== undefined) {
+      _.forEach(params, (value, key) => {
+        requestString += `&${key}=${value}`;
+      });
+    }
+
+    return new Request(requestString);
   }
-
-  return new Request(requestString);
+  else {
+    throw new Error('getAuthedRequest() must be supplied both a "path" and "apiKey');
+  }
 }
 
 /**
@@ -57,10 +67,10 @@ function formatApiData(state, type) {
   switch (type) {
     case 'SEARCH_MOVIE_RESULTS':
       return formatMovieSearchResults(state);
-    
+
     case 'SEARCH_TVSHOW_RESULTS':
       return formatTvShowSearchResults(state);
-    
+
     case 'SEARCH_PEOPLE_RESULTS':
       return formatPeopleSearchResults(state);
 
@@ -72,7 +82,7 @@ function formatApiData(state, type) {
 
     case 'CONFIGURATION':
       return formatConfiguration(state);
-      
+
     default:
       return state;
   }

@@ -312,7 +312,12 @@ function fetchData({
   }
 
   if (path) {
-    const req = getAuthedRequest(path, params, config.apiKey);
+    const req = getAuthedRequest({
+      path: path,
+      params: params,
+      apiKey: config.apiKey
+    });
+
     return fetch(req)
       .then(res => {
         return res.json();
