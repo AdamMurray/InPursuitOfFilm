@@ -30,7 +30,7 @@ class App extends Component {
       tvPageToGet: 1,
       peopleById: {},
       peoplePageToGet: 1,
-      appConnectivityState: 'online'
+      appConnectivityState: navigator.onLine ? 'online' : 'offline'
     };
 
     this.getConfiguration = this.getConfiguration.bind(this);
@@ -254,7 +254,7 @@ class App extends Component {
           searchQuery={this.state.searchQuery}
           />
 
-          {notification}
+        {notification}
       </div>
     );
   }
