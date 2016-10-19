@@ -184,6 +184,9 @@ class App extends Component {
     });
   }
 
+  /**
+   * Render function
+   */
   render() {
     return (
       <div>
