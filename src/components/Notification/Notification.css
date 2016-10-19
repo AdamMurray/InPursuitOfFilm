@@ -1,0 +1,12 @@
+
+.ipof__notification {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  background-color: #20ffbb;
+  color: #444;
+  padding: 1.5rem;
+  z-index: 30;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}

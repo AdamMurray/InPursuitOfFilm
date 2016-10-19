@@ -5,8 +5,10 @@ import './Nav.css';
 // based on root, e.g. https://adammurray.github.io/
 const logoFilePath = `${window.location.href}/film-icon.png`;
 
-const Nav = () =>
-  <nav className="ipof__nav">
+const Nav = ({
+  appConnectivityState
+}) =>
+  <nav className={`ipof__nav ${appConnectivityState}`}>
     <img src={logoFilePath} alt="logo" className="ipof__nav__logo" />
     <h1 className="ipof__nav__title">
       In Pursuit of Film

@@ -5,6 +5,7 @@ import ScrollPanel from '../ScrollPanel/ScrollPanel';
 import _ from 'lodash';
 
 const Main = ({
+  appConnectivityState,
   imageBaseUrl,
   movieImageSize,
   tvImageSize,

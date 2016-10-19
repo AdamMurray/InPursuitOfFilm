@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Nav from '../../components/Nav/Nav';
 import Main from '../../components/Main/Main';
+import Notification from '../../components/Notification/Notification';
 import apiService from '../../services/apiService';
 
 /**
@@ -28,7 +29,8 @@ class App extends Component {
       tvById: {},
       tvPageToGet: 1,
       peopleById: {},
-      peoplePageToGet: 1
+      peoplePageToGet: 1,
+      appConnectivityState: 'online'
     };
 
     this.getConfiguration = this.getConfiguration.bind(this);
@@ -39,6 +41,37 @@ class App extends Component {
     this.searchMovies = this.searchMovies.bind(this);
     this.searchTvShows = this.searchTvShows.bind(this);
     this.searchPeople = this.searchPeople.bind(this);
+    this.addEventListeners = this.addEventListeners.bind(this);
+    this.handleOnline = this.handleOnline.bind(this);
+    this.handleOffline = this.handleOffline.bind(this);
+  }
+
+  /**
+   * Add event listeners
+   */
+  addEventListeners() {
+    window.addEventListener('online', this.handleOnline);
+    window.addEventListener('offline', this.handleOffline);
+  }
+
+  /**
+   * Handle online event
+   */
+  handleOnline(evt) {
+    console.log('Online:', evt);
+    this.setState({
+      appConnectivityState: 'online'
+    });
+  }
+
+  /**
+   * Handle offline event
+   */
+  handleOffline(evt) {
+    console.log('Offline:', evt);
+    this.setState({
+      appConnectivityState: 'offline'
+    });
   }
 
   /**
@@ -48,6 +81,8 @@ class App extends Component {
    * on componentWillMount
    */
   componentWillMount() {
+    this.addEventListeners();
+
     this.setState({
       loading: true
     });
@@ -188,10 +223,19 @@ class App extends Component {
    * Render function
    */
   render() {
+    let notification;
+    if (this.state.appConnectivityState === 'offline') {
+      notification = <Notification message={"Oh no, it looks like you're offline"} />;
+    }
+    else {
+      notification = null;
+    }
+
     return (
       <div>
-        <Nav />
+        <Nav appConnectivityState={this.state.appConnectivityState} />
         <Main
+          appConnectivityState={this.state.appConnectivityState}
           loading={this.state.loading}
           imageBaseUrl={this.state.imageBaseUrl}
           movieImageSize={this.state.movieImageSize}
@@ -204,6 +248,8 @@ class App extends Component {
           setSearchQuery={this.setSearchQuery}
           searchQuery={this.state.searchQuery}
           />
+
+          {notification}
       </div>
     );
   }

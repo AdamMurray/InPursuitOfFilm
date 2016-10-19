@@ -18,6 +18,6 @@
 
 ## Fun Extras
 
-* Use the `navigator` API to inform users if they go offline / online
+* Use the `navigator` API to inform users if they go offline / online (and make the app grey)
 * Create custom toasts for the above
 * Inform users if they are on low battery (change image size based on this)

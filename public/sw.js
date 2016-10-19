@@ -8,6 +8,7 @@
 //   var config = {
 //     version: '1.0.0',
 //     staticCacheItems: [
+//       'index.html',
 //     ],
 //     offlineImage: '<svg role="img" aria-labelledby="offline-title"'
 //     + ' viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">'

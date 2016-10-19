@@ -1,13 +1,20 @@
 
 .ipof__nav {
   padding: 1rem;
-  background-color: #13002b;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
   z-index: 20;
+}
+
+.ipof__nav.online {
+  background-color: #13002b;
+}
+
+.ipof__nav.offline {
+  background-color: #777;
 }
 
 .ipof__nav__title {
