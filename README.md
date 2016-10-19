@@ -16,8 +16,14 @@ $ npm start
 To build the project for production, run:
 
 ```
-$ npm run build
+$ ./scripts/build_prod.sh
 ```
+
+This will run the build script and put the relevant files in the project root, so
+that they can be hosted using Github Pages.
+
+**Note: the file paths referenced in `index.html` must be pointed to the correct Github pages
+URL, therefore the leading / must be removed from them.**
 
 This creates / updates the `build` folder (found in the project's root)
 with all the necessary files for deployment.
