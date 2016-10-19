@@ -7,6 +7,9 @@ import apiService from '../../services/apiService';
  * App component: main container for app, handles API calls
  */
 class App extends Component {
+  /**
+   * Create App
+   */
   constructor(props) {
     super(props);
 
@@ -20,9 +23,15 @@ class App extends Component {
       movieGenres: null,
       tvGenres: null,
     };
+
+    this.getConfiguration = this.getConfiguration.bind(this);
+    this.getMovieGenres = this.getMovieGenres.bind(this);
+    this.getTvGenres = this.getTvGenres.bind(this);
   }
 
   /**
+   * Component Will Mount
+   * 
    * Load configuration, movie genres, and tv genres
    * on componentWillMount
    */
@@ -32,9 +41,9 @@ class App extends Component {
     });
 
     Promise.all([
-      getConfiguration(),
-      getMovieGenres(),
-      getTvGenres()
+      this.getConfiguration(),
+      this.getMovieGenres(),
+      this.getTvGenres()
     ])
       .then(() => {
         this.setState({
@@ -43,6 +52,11 @@ class App extends Component {
       });
   }
 
+  /**
+   * Get configuration for TheMovieDB
+   * 
+   * @returns { Promise }
+   */
   getConfiguration() {
     return apiService.getConfiguration().then(data => {
       console.log('Config data:', data);
@@ -56,6 +70,11 @@ class App extends Component {
     });
   }
 
+  /**
+   * Get movie genres
+   * 
+   * @returns { Promise }
+   */
   getMovieGenres() {
     return apiService.getMovieGenres().then(data => {
       console.log('Movie genre data:', data);
@@ -65,6 +84,11 @@ class App extends Component {
     });
   }
 
+  /**
+   * Get tv genres
+   * 
+   * @returns { Promise }
+   */
   getTvGenres() {
     return apiService.getTvGenres().then(data => {
       console.log('TV genre data:', data);
