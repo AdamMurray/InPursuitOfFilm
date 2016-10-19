@@ -1,6 +1,8 @@
 import config from '../config/config';
 import _ from 'lodash';
 import lockr from 'lockr';
+import { formatApiData, getAuthedRequest } from './apiServiceFunctions';
+
 
 /* ====================================== */
 /*              API Service
@@ -24,7 +26,6 @@ export default apiService;
 /*              Functions
 /* ====================================== */
 
-
 /*  Configuration
  * ====================================== */
 
@@ -37,6 +38,14 @@ export default apiService;
  * @returns { Promise }
  */
 function getConfiguration() {
+  return fetchData({
+    name: 'config',
+    path: config.paths.configuration,
+    lsKey: config.localStorageKeys.configuration,
+    params: {},
+    formatType: 'CONFIGURATION',
+    shouldCacheResults: true
+  });
 }
 
 
@@ -183,7 +192,8 @@ function getTvShowById(id) {
 function getPersonById(id) {
 }
 
-/* Generic fetch functions
+
+/* Generic fetch function
  * ====================================== */
 
 /**
@@ -203,11 +213,44 @@ function getPersonById(id) {
  * @param { String } formatType - string specifying format type to use on data (formatting will be implemented in a standalone way)
  * @param { Boolean } shouldCacheResults - specifies whether or not to cache result data in local storage
  */
-function fetchData(
-  name,
-  path,
-  lsKey,
-  params,
-  formatType,
-  shouldCacheResults) {
+function fetchData({
+  name = 'default name',
+  path = null,
+  lsKey = null,
+  params = {},
+  formatType = 'DEFAULT',
+  shouldCacheResults = false}) {
+
+  if (lsKey) {
+    let cachedData = lockr.get(lsKey);
+    if (cachedData) {
+      // console.log(`Fetch ${name} from LS...`);
+      return Promise.resolve(cachedData).then(data => {
+        return data;
+      });
+    }
+  }
+
+  if (path) {
+    const req = getAuthedRequest(path, params, config.apiKey);
+    return fetch(req)
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+
+        if (formatType) {
+          data = formatApiData(data, formatType);
+        }
+
+        if (shouldCacheResults) {
+          lockr.set(lsKey, data);
+        }
+
+        return data;
+      });
+  }
+  else {
+    throw new Error('fetchData() must be provided with a "path" property');
+  }
 }
