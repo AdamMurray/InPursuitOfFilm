@@ -22,7 +22,7 @@ class ItemView extends Component {
             <h2>{this.props.title}</h2>
           </div>
           <div className="ipof__item-view__middle__image">
-            <img src={this.props.imageUrl}  />
+            <img src={this.props.imageUrl} alt={this.props.title} />
           </div>
         </div>
 

@@ -39,7 +39,7 @@ const ScrollPanel = ({
       <div className="ipof__card ipof__card--empty">
         <div className="ipof__card__text">
           <div style={{ padding: '1rem' }}>
-            There is nothing to see yet :(
+            Search in the box above to see some results
           </div>
         </div>
       </div>;

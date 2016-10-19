@@ -22,11 +22,20 @@ class App extends Component {
       personProfilePicSize: null,
       movieGenres: null,
       tvGenres: null,
+      searchQuery: '',
+      moviesById: {},
+      moviesPageToGet: 1,
+      tvById: {},
+      tvPageToGet: 1,
+      peopleById: {},
+      peoplePageToGet: 1
     };
 
     this.getConfiguration = this.getConfiguration.bind(this);
     this.getMovieGenres = this.getMovieGenres.bind(this);
     this.getTvGenres = this.getTvGenres.bind(this);
+    this.searchDb = this.searchDb.bind(this);
+    this.setSearchQuery = this.setSearchQuery.bind(this);
   }
 
   /**
@@ -98,9 +107,80 @@ class App extends Component {
     });
   }
 
+  /**
+   * Search TheMovieDB
+   * 
+   * @params { Event } evt
+   */
+  searchDb(evt) {
+    evt.preventDefault();
+
+    if (this.state.searchQuery.length) {
+      this.setState({
+        loading: true
+      });
+
+      Promise.all([
+        apiService.searchMovies(this.state.searchQuery, this.state.moviesPageToGet).then(data => {
+          this.setState({
+            moviesById: data.moviesById,
+            loading: false
+          });
+          console.log('Movie data:', data);
+        }),
+
+        apiService.searchTvShows(this.state.searchQuery, this.state.tvPageToGet).then(data => {
+          this.setState({
+            tvById: data.tvById
+          });
+          console.log('Tv data:', data);
+        }),
+
+        apiService.searchPeople(this.state.searchQuery, this.state.peoplePageToGet).then(data => {
+          this.setState({
+            peopleById: data.peopleById
+          });
+          console.log('People data:', data);
+        })
+
+      ])
+        .then(() => {
+          this.setState({
+            loading: false
+          });
+        });
+
+    }
+
+    return false;
+  }
+
+  /**
+   * Search search query
+   */
+  setSearchQuery(event) {
+    this.setState({
+      searchQuery: event.target.value
+    });
+  }
+
   render() {
     return (
       <div>
+        <Nav />
+        <Main
+          loading={this.state.loading}
+          imageBaseUrl={this.state.imageBaseUrl}
+          movieImageSize={this.state.movieImageSize}
+          tvImageSize={this.state.tvImageSize}
+          personProfilePicSize={this.state.personProfilePicSize}
+          movies={this.state.moviesById}
+          tvShows={this.state.tvById}
+          people={this.state.peopleById}
+          searchDb={this.searchDb}
+          setSearchQuery={this.setSearchQuery}
+          searchQuery={this.state.searchQuery}
+          />
       </div>
     );
   }
