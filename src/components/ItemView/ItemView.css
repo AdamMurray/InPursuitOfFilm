@@ -1,0 +1,44 @@
+
+.ipof__item-view {
+  width: 100%;
+  height: calc(100% - 4.4rem);
+  background: #fff;
+  position: fixed;
+  left: 0;
+  top: 4.4rem;
+  transform: translateX(102%);
+  transition-duration: .4s;
+  z-index: 15;
+  will-change: transform; /* creates a new stacking context */
+}
+
+.ipof__item-view--show {
+  transform: translateX(0%);
+}
+
+.ipof__item-view__top {
+  padding: 1rem;
+}
+
+.ipof__item-view__middle {
+  padding: 1rem;
+}
+
+.ipof__item-view__middle__image {
+  height: 30rem;
+  overflow: hidden;
+}
+
+.ipof__item-view__middle__image img {
+  height: 100%;
+}
+
+.ipof__item-view__middle__title {
+  margin-bottom: 1rem;
+}
+
+.ipof__item-view__middle__title h2 {
+  font-size: 1.8rem;
+  color: #555;
+  text-transform: uppercase;
+}

@@ -1,0 +1,70 @@
+
+.ipof__card {
+  display: inline-block;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  width: 200px;
+  height: 17rem;
+  background-color: #fff;
+  margin-right: 1rem;
+  white-space: initial;
+  overflow: hidden;
+}
+
+.ipof__card:before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  /*background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), transparent);*/
+  width: 100%;
+  height: 100%;
+  transition-duration: .4s;
+  transition-property: background;
+}
+
+.ipof__card:hover:before {
+  /*background: none;*/
+}
+
+.ipof__card:hover .ipof__card__title {
+  color: #20ffbb;
+  cursor: pointer;
+}
+
+.ipof__card--empty {
+  background-color: transparent;
+  border: 3px solid #aaa;
+  color: #888;
+  line-height: 1.5;
+  box-shadow: none;
+}
+
+.ipof__card--empty:before {
+  background: none;
+}
+
+.ipof__card__title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #fff;
+  z-index: 10;
+  padding: .8rem;
+  font-size: 1.2rem;
+  font-weight: 300;
+  transition-property: color;
+  transition-duration: .2s;
+  text-transform: uppercase;
+}
+
+.ipof__card__image {
+  overflow: hidden;
+  z-index: 5;
+}
+
+.ipof__card__image img {
+  width: 100%;
+}
