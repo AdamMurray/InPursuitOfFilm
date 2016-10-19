@@ -199,7 +199,7 @@ function formatPeopleSearchResults(data) {
 
   return resultsObj;
 
-  function addTopeople(obj, person) {
+  function addToPeople(obj, person) {
     let newObj = obj;
     newObj[person.id] = person;
     return newObj;

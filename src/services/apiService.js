@@ -299,7 +299,8 @@ function fetchData({
   lsKey = null,
   params = {},
   formatType = 'DEFAULT',
-  shouldCacheResults = false}) {
+  shouldCacheResults = false
+}) {
 
   if (lsKey) {
     let cachedData = lockr.get(lsKey);
