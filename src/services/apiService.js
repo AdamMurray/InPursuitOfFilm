@@ -5,6 +5,7 @@ import lockr from 'lockr';
 /* ====================================== */
 /*              API Service
 /* ====================================== */
+
 const apiService = {
   getConfiguration: getConfiguration,
   getMovieGenres: getMovieGenres,
