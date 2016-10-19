@@ -36,6 +36,9 @@ class App extends Component {
     this.getTvGenres = this.getTvGenres.bind(this);
     this.searchDb = this.searchDb.bind(this);
     this.setSearchQuery = this.setSearchQuery.bind(this);
+    this.searchMovies = this.searchMovies.bind(this);
+    this.searchTvShows = this.searchTvShows.bind(this);
+    this.searchPeople = this.searchPeople.bind(this);
   }
 
   /**
@@ -121,38 +124,55 @@ class App extends Component {
       });
 
       Promise.all([
-        apiService.searchMovies(this.state.searchQuery, this.state.moviesPageToGet).then(data => {
-          this.setState({
-            moviesById: data.moviesById,
-            loading: false
-          });
-          console.log('Movie data:', data);
-        }),
-
-        apiService.searchTvShows(this.state.searchQuery, this.state.tvPageToGet).then(data => {
-          this.setState({
-            tvById: data.tvById
-          });
-          console.log('Tv data:', data);
-        }),
-
-        apiService.searchPeople(this.state.searchQuery, this.state.peoplePageToGet).then(data => {
-          this.setState({
-            peopleById: data.peopleById
-          });
-          console.log('People data:', data);
-        })
-
+        this.searchMovies(),
+        this.searchTvShows(),
+        this.searchPeople()
       ])
         .then(() => {
           this.setState({
             loading: false
           });
         });
-
     }
 
     return false;
+  }
+
+  /**
+   * Search movies
+   */
+  searchMovies() {
+    return apiService.searchMovies(this.state.searchQuery, this.state.moviesPageToGet).then(data => {
+      this.setState({
+        moviesById: data.moviesById,
+        loading: false
+      });
+      console.log('Movie data:', data);
+    });
+  }
+
+  /**
+   * Search TV shows
+   */
+  searchTvShows() {
+    return apiService.searchTvShows(this.state.searchQuery, this.state.tvPageToGet).then(data => {
+      this.setState({
+        tvById: data.tvById
+      });
+      console.log('Tv data:', data);
+    });
+  }
+
+  /**
+   * Search people
+   */
+  searchPeople() {
+    return apiService.searchPeople(this.state.searchQuery, this.state.peoplePageToGet).then(data => {
+      this.setState({
+        peopleById: data.peopleById
+      });
+      console.log('People data:', data);
+    });
   }
 
   /**
