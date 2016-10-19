@@ -72,6 +72,14 @@ function getConfiguration() {
  * @returns { Promise }
  */
 function getMovieGenres() {
+  return fetchData({
+    name: 'movie genres',
+    path: config.paths.movieGenres,
+    lsKey: config.localStorageKeys.movieGenres,
+    params: {},
+    formatType: 'MOVIE_GENRES',
+    shouldCacheResults: true
+  });
 }
 
 /**
@@ -94,6 +102,14 @@ function getMovieGenres() {
  * @returns { Promise }
  */
 function getTvGenres() {
+  return fetchData({
+    name: 'tv genres',
+    path: config.paths.tvGenres,
+    lsKey: config.localStorageKeys.tvGenres,
+    params: {},
+    formatType: 'TV_GENRES',
+    shouldCacheResults: true
+  });
 }
 
 
@@ -115,6 +131,19 @@ function getTvGenres() {
  * @returns { Promise }
  */
 function searchMovies(query, page) {
+  const params = {
+    query: query,
+    page: page || 1
+  };
+
+  return fetchData({
+    name: 'search movies',
+    path: config.paths.searchMovies,
+    lsKey: null,
+    params: params,
+    formatType: 'SEARCH_MOVIE_RESULTS',
+    shouldCacheResults: false
+  });
 }
 
 /**
@@ -130,6 +159,19 @@ function searchMovies(query, page) {
  * @returns { Promise }
  */
 function searchTvShows(query, page) {
+  const params = {
+    query: query,
+    page: page || 1
+  };
+
+  return fetchData({
+    name: 'search tv shows',
+    path: config.paths.searchTvShows,
+    lsKey: null,
+    params: params,
+    formatType: 'SEARCH_TVSHOW_RESULTS',
+    shouldCacheResults: false
+  });
 }
 
 /**
@@ -147,6 +189,20 @@ function searchTvShows(query, page) {
  * @returns { Promise }
  */
 function searchPeople(query, page) {
+  const params = {
+    query: query,
+    page: page || 1
+  };
+  
+  // TODO: perhaps formatType strings would be better off in a config file?
+  return fetchData({
+    name: 'search people',
+    path: config.paths.searchPeople,
+    lsKey: null,
+    params: params,
+    formatType: 'SEARCH_PEOPLE_RESULTS',
+    shouldCacheResults: false
+  });
 }
 
 
@@ -164,6 +220,14 @@ function searchPeople(query, page) {
  * @param { Number|String } id - id of the movie to get
  */
 function getMovieById(id) {
+  return fetchData({
+    name: `get movie ${id}`,
+    path: `${config.paths.movie}${id}`,
+    lsKey: null,
+    params: {},
+    formatType: 'DEFAULT',
+    shouldCacheResults: false
+  });
 }
 
 /**
@@ -177,6 +241,14 @@ function getMovieById(id) {
  * @param { Number|String } id - id of the tv show to get
  */
 function getTvShowById(id) {
+  return fetchData({
+    name: `get tv show ${id}`,
+    path: `${config.paths.tv}${id}`,
+    lsKey: null,
+    params: {},
+    formatType: 'DEFAULT',
+    shouldCacheResults: false
+  });
 }
 
 /**
@@ -190,6 +262,14 @@ function getTvShowById(id) {
  * @param { Number|String } id - id of the person to get
  */
 function getPersonById(id) {
+  return fetchData({
+    name: `get person ${id}`,
+    path: `${config.paths.person}${id}`,
+    lsKey: null,
+    params: {},
+    formatType: 'DEFAULT',
+    shouldCacheResults: false
+  });
 }
 
 
