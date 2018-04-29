@@ -4,6 +4,8 @@
 A progressive web application which allows users to search The Movie DB API,
 and view matching films, TV shows, and people.
 
+Hosted at: [https://adammurray.github.io/InPursuitOfFilm/](https://adammurray.github.io/InPursuitOfFilm/)
+
 ## Building // Development // Testing
 
 In order to start up the development server and build the project for
